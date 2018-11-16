@@ -2,7 +2,7 @@ import subprocess
 import pickle
 import argparse
 import os
-
+import sys
 
 def get_filters(user, verbose=False):
     """Function to extract filters.
@@ -54,9 +54,18 @@ def main():
 
 
 if __name__ == '__main__':
+
+    if sys.path[0] != '':
+        default_path = os.path.join(sys.path[0], '../data/filters')
+        if not os.path.exists(default_path):
+            default_path = '.'
+
     parser = argparse.ArgumentParser(prog='export_filters.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--user', '-u', help='Username to export', required=True)
-    parser.add_argument('--path', '-p', help='Path to write to', default='.')
+    parser.add_argument('--path', '-p', help='Path to write to. Default value is ../data/filters relative to the '
+                    'scripts true position, not relative to the position you call the scripts from!'
+                    'If that path does not exist, then the default path is the current location of '
+                                             'whoever calls the script.' , default=default_path)
     parser.add_argument('--verbose', '-v', help='Chatty guy', action='store_true')
 
     args = parser.parse_args()
