@@ -113,3 +113,6 @@ venv.bak/
 # Contents of restored and transferred accounts lists
 /data/restored.txt
 /data/transferred.txt
+
+# Contents of migration files
+/data/*/*
