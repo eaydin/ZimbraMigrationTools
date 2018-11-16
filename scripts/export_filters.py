@@ -55,7 +55,7 @@ def main():
 
 if __name__ == '__main__':
 
-    # Catch the path where the script lives
+    # Catch the path where the script LIVES
     # NOT FROM WHERE IT IS CALLED
     # so if the script lives in /opt/zimbra/ZimbraMigrationTools/scripts and you call it from /opt as
     # python zimbra/ZimbraMigrationTools/scripts/export_filters.py billgates@microsoft.com
