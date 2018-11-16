@@ -1,9 +1,7 @@
 import subprocess
-import pickle
 import argparse
-import os
-import sys
 from VTZM import helpers
+
 
 def get_filters(user, verbose=False):
     """Function to extract filters.
@@ -33,17 +31,6 @@ def get_filters(user, verbose=False):
         return ps3
     except Exception as err:
         print("Error while getting filters: {0}".format(str(err)))
-        return False
-
-
-def save_file(filters, user, path, verbose=False):
-    file_path = os.path.join(path, user + ".pickle")
-    try:
-        with open(file_path, 'wb') as fp:
-            pickle.dump(filters, fp, protocol=pickle.HIGHEST_PROTOCOL)
-        return True
-    except Exception as err:
-        print("Error while dumping pickle: {0}".format(str(err)))
         return False
 
 
