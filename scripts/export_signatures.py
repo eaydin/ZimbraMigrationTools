@@ -48,18 +48,20 @@ def main():
             temp_sig += line.strip()
 
     if args.verbose:
-        print(signatures)
+        print("HTML Signatures Exported: ")
+        print(signatures_html)
+        print("PLAIN Text Signatures Exported: ")
+        print(signatures_plain)
 
     pickle_file_path = os.path.join(args.path, user + ".pickle")
 
-    master_pickle = {}
-    master_pickle['HTML'] = signatures_html
-    master_pickle['PLAIN'] = signatures_plain
+    master_pickle = {'HTML': signatures_html, 'PLAIN': signatures_plain}
 
     with open(pickle_file_path, 'wb') as fp:
         pickle.dump(master_pickle, fp, protocol=pickle.HIGHEST_PROTOCOL)
 
     return pickle_file_path
+
 
 if __name__ == '__main__':
 
