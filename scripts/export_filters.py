@@ -50,8 +50,13 @@ def save_file(filters, user, path, verbose=False):
 def main():
     filters = get_filters(args.user, args.verbose)
     if filters:
-        save_file(filters, args.user, args.path, args.verbose)
-        print("Filter save success for user {user} to {path}".format(path=args.path, user=args.user))
+        try:
+            helpers.save_pickle(filters, args.user, args.path, args.verbose)
+            print("Filter save success for user {user} to {path}".format(path=args.path, user=args.user))
+        except IOError as err:
+            print("IOError while saving filters file: {0}".format(str(err)))
+        except Exception as err:
+            print("Unknown exception while saving filters file: {0}".format(str(err)))
 
 
 if __name__ == '__main__':
