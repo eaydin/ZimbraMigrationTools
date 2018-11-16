@@ -1,5 +1,6 @@
 import sys
 import os
+import pickle
 
 
 def generate_default_path(custom_folder):
@@ -37,3 +38,51 @@ def generate_default_path(custom_folder):
         default_path = '.'
 
     return default_path
+
+
+def save_pickle(data, filename, path, verbose=False):
+    """Saves a pickle file.
+
+    Parameters
+    ----------
+    data: object
+        Whatever Python object we pass that want it to be written as a Pickle file.
+
+    filename: str
+        Filename to write. Do not include the .pickle extension.
+
+    path: str
+        Path to write the file to. If this path does not exist, will raise an IO Error.
+
+    verbose: bool
+        Self explanatory.
+
+    Returns
+    -------
+    bool
+        True if succeeds, False or Exception if fails.
+
+    Raises
+    ------
+    IOError
+        If filepath does not exist.
+
+    Exception
+        A generic exception when opening the file in write mode, or dump ping fails.
+
+    """
+
+    if not os.path.exists(path):
+        raise IOError("Pickle not dumped since path does not exist: {0}".format(path))
+
+    file_path = os.path.join(path, filename + ".pickle")
+
+    try:
+        with open(file_path, 'wb') as fp:
+            pickle.dump(data, fp, protocol=pickle.HIGHEST_PROTOCOL)
+        if verbose:
+            print("Successfully dumped to {0}".format(file_path))
+        return True
+    except Exception as err:
+        raise Exception("Error while dumping pickle: {0}".format(str(err)))
+
