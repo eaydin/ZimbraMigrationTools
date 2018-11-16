@@ -21,10 +21,14 @@ def get_filters(user, verbose=False):
         Returns the string of filters if succeeded. Yet returns a boolean False if an exception occurs.
 
     """
+    if verbose:
+        print("Getting filters for user: {0}".format(user))
     try:
         ps = subprocess.Popen(["zmprov", "ga", user, "zimbraMailSieveScript"], stdout=subprocess.PIPE)
         ps2 = subprocess.Popen(["sed", "-e", "1d"], stdin=ps.stdout, stdout=subprocess.PIPE)
         ps3 = subprocess.check_output(["sed", "s/zimbraMailSieveScript: //g"], stdin=ps2.stdout)
+        if verbose:
+            print("Got filters from zmprov for user: {0}".format(user))
         return ps3
     except Exception as err:
         print("Error while getting filters: {0}".format(str(err)))
