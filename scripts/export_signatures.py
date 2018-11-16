@@ -65,7 +65,7 @@ def main():
 
 if __name__ == '__main__':
 
-    default_path = helpers.generate_default_path('../data/signatures')
+    default_path = helpers.generate_default_path('data/signatures')
 
     parser = argparse.ArgumentParser(prog='export_signatures.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 

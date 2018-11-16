@@ -48,7 +48,7 @@ def main():
 
 if __name__ == '__main__':
 
-    default_path = helpers.generate_default_path('../data/filters')
+    default_path = helpers.generate_default_path('data/filters')
 
     parser = argparse.ArgumentParser(prog='export_filters.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--user', '-u', help='Username to export', required=True)
