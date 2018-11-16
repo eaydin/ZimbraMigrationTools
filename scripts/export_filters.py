@@ -3,6 +3,7 @@ import pickle
 import argparse
 import os
 import sys
+from VTZM import helpers
 
 def get_filters(user, verbose=False):
     """Function to extract filters.
@@ -55,21 +56,7 @@ def main():
 
 if __name__ == '__main__':
 
-    # Catch the path where the script LIVES
-    # NOT FROM WHERE IT IS CALLED
-    # so if the script lives in /opt/zimbra/ZimbraMigrationTools/scripts and you call it from /opt as
-    # python zimbra/ZimbraMigrationTools/scripts/export_filters.py billgates@microsoft.com
-    # then the path catched will be /opt/zimbra/ZimbraMigrationTools/scripts
-    # The script wil check if /opt/zimbra/ZimbraMigrationTools/data/filters exists
-    # If it does, that will be the default path
-    # If it doesn't, then the script from where it is called (in our example /opt) will be the default path
-
-    if sys.path[0] != '':
-        default_path = os.path.join(sys.path[0], '../data/filters')
-        if not os.path.exists(default_path):
-            default_path = '.'
-    else:
-        default_path = '.'
+    default_path = helpers.generate_default_path('../data/filters')
 
     parser = argparse.ArgumentParser(prog='export_filters.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--user', '-u', help='Username to export', required=True)
