@@ -1,5 +1,4 @@
 from subprocess import check_output
-import sys
 import pickle
 import argparse
 import os
