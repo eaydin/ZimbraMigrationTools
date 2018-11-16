@@ -5,10 +5,14 @@ import os
 
 
 def get_filters(user, verbose=False):
-    ps = subprocess.Popen(["zmprov", "ga", user, "zimbraMailSieveScript"], stdout=subprocess.PIPE)
-    ps2 = subprocess.Popen(["sed", "-e", "1d"], stdin=ps.stdout, stdout=subprocess.PIPE)
-    ps3 = subprocess.check_output(["sed", "s/zimbraMailSieveScript: //g"], stdin=ps2.stdout)
-    return ps3
+    try:
+        ps = subprocess.Popen(["zmprov", "ga", user, "zimbraMailSieveScript"], stdout=subprocess.PIPE)
+        ps2 = subprocess.Popen(["sed", "-e", "1d"], stdin=ps.stdout, stdout=subprocess.PIPE)
+        ps3 = subprocess.check_output(["sed", "s/zimbraMailSieveScript: //g"], stdin=ps2.stdout)
+        return ps3
+    except Exception as err:
+        print("Error while getting filters: {0}".format(str(err)))
+        return False
 
 
 def save_file(filters, user, path, verbose=False):
@@ -24,8 +28,9 @@ def save_file(filters, user, path, verbose=False):
 
 def main():
     filters = get_filters(args.user, args.verbose)
-    save_file(filters, args.user, args.path, args.verbose)
-    print("Filter save success for user {user} to {path}".format(path=args.path, user=args.user))
+    if filters:
+        save_file(filters, args.user, args.path, args.verbose)
+        print("Filter save success for user {user} to {path}".format(path=args.path, user=args.user))
 
 
 if __name__ == '__main__':
