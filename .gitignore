@@ -114,5 +114,6 @@ venv.bak/
 /data/restored.txt
 /data/transferred.txt
 
-# Contents of migration files
+# Contents of migration files, yet keep the .keep files to have an empty directory structure in git
 /data/*/*
+!/data/*/.keep
