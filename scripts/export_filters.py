@@ -5,6 +5,22 @@ import os
 
 
 def get_filters(user, verbose=False):
+    """Function to extract filters.
+
+    Parameters
+    ----------
+    user : str
+        The username to extract. Ex: billgates@microsoft.com
+
+    verbose : bool
+        Should we get verbose?
+
+    Returns
+    -------
+    str
+        Returns the string of filters if succeeded. Yet returns a boolean False if an exception occurs.
+
+    """
     try:
         ps = subprocess.Popen(["zmprov", "ga", user, "zimbraMailSieveScript"], stdout=subprocess.PIPE)
         ps2 = subprocess.Popen(["sed", "-e", "1d"], stdin=ps.stdout, stdout=subprocess.PIPE)
