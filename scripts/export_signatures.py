@@ -3,6 +3,7 @@ import sys
 import pickle
 import argparse
 import os
+from VTZM import helpers
 
 
 def main():
@@ -65,13 +66,12 @@ def main():
 
 if __name__ == '__main__':
 
-    if len(sys.argv) < 2:
-        raise SystemExit("Please Provide Username")
+    default_path = helpers.generate_default_path('../data/signatures')
 
     parser = argparse.ArgumentParser(prog='export_signatures.py', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('--user', '-u', help='Username to export', required=True)
-    parser.add_argument('--path', '-p', help='Path to write to', default='.')
+    parser.add_argument('--path', '-p', help='Path to write to', default=default_path)
     parser.add_argument('--verbose', '-v', help='Chatty guy', action='store_true')
 
     args = parser.parse_args()
