@@ -27,5 +27,6 @@ for i in $(cat ${NEW_ACCOUNTS_PATH}/users.txt); do
 
     log_line "Restored user ${i}"
 done
+
 log_line "Restoration complete"
 
