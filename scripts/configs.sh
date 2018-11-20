@@ -32,6 +32,8 @@ NEW_PASSWORDS_PATH="$NEW_DATA_ROOT_PATH/passwords/"
 # Lists to append and read from when migrating mailboxes
 TRANSFERRED_TXT_PATH="$NEW_DATA_ROOT_PATH/transferred.txt"
 RESTORED_TXT_PATH="$NEW_DATA_ROOT_PATH/restored.txt"
+TRANSFERRED_DIFF_TXT_PATH="$NEW_DATA_ROOT_PATH/transferred_diff.txt"
+RESTORED_DIFF_TXT_PATH="$NEW_DATA_ROOT_PATH/restored_diff.txt"
 
 # Parameters of the new server to connect while transferring data
 
