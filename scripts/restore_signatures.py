@@ -1,7 +1,6 @@
 from subprocess import check_output
 import pickle
 import argparse
-import os
 
 
 def main():
