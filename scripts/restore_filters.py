@@ -1,23 +1,25 @@
 import subprocess
-import pickle
 import argparse
+from VTZM import helpers
 
 
-def read_filters(filepath, verbose=False):
-    with open(filepath, 'rb') as fp:
-        filters = pickle.load(fp)
-    if verbose:
-        print("Filters read:")
-        print(filters)
+def main():
+    filters = helpers.read_pickle(args.file)
+    if filters:
 
-    return filters
+        if args.verbose:
+            print("Filters read: ")
+            print(filters)
 
+        try:
+            ps = subprocess.check_output(["zmprov", "ma", args.user, "zimbraMailSieveScript", filters])
+        except Exception as err:
+            print("Error while running zmprov command: {0}".format(str(err)))
+        else:
+            print("Filters for {0} successfully imported.".format(args.user))
 
-def restore_filters(filters, user, verbose=False):
-    ps = subprocess.check_output(["zmprov", "ma", user, "zimbraMailSieveScript", filters])
-
-    if verbose:
-        print("Filters restored.")
+    else:
+        print("Error while reading filters.")
 
 
 if __name__ == '__main__':
@@ -29,12 +31,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    filters = read_filters(args.file, args.verbose)
-    try:
-        restore_filters(filters, args.user, args.verbose)
-    except Exception as err:
-        print("Error while restoring filters: {0}".format(str(err)))
-        raise SystemExit
-
-    if not args.verbose:
-        print("Filters restored for user: {0} from file: {1}".format(args.user, args.file))
+    main()
