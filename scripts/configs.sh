@@ -57,3 +57,11 @@ check_err () {
         exit 1
     fi
 }
+
+check_err_cont () {
+    if [[ $? -ne 0 ]]; then
+        log_line " -- ERROR: $1"
+        log_line "Continuing to next element"
+        continue
+    fi
+}

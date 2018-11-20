@@ -2,14 +2,6 @@
 
 source configs.sh
 
-check_err_cont () {
-    if [[ $? -ne 0 ]]; then
-        log_line " -- ERROR: $1"
-        log_line "Continuing to next element"
-        continue
-    fi
-}
-
 log_line "Restoring accounts and passwords"
 
 for i in $(cat ${NEW_ACCOUNTS_PATH}/users.txt); do
