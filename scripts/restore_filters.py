@@ -1,6 +1,7 @@
 import subprocess
 import argparse
 from VTZM import helpers
+import sys
 
 
 def main():
@@ -15,11 +16,13 @@ def main():
             ps = subprocess.check_output(["zmprov", "ma", args.user, "zimbraMailSieveScript", filters])
         except Exception as err:
             print("Error while running zmprov command: {0}".format(str(err)))
+            sys.exit(1)
         else:
             print("Filters for {0} successfully imported.".format(args.user))
 
     else:
         print("Error while reading filters.")
+        sys.exit(1)
 
 
 if __name__ == '__main__':
