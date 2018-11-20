@@ -17,6 +17,7 @@ OLD_DIST_LISTS_PATH="$OLD_DATA_ROOT_PATH/dist_lists/"
 OLD_ACCOUNT_DETAILS_PATH="$OLD_DATA_ROOT_PATH/account_details/"
 OLD_ACCOUNTS_PATH="$OLD_DATA_ROOT_PATH/accounts/"
 OLD_PASSWORDS_PATH="$OLD_DATA_ROOT_PATH/passwords/"
+OLD_ALIASES_PATH="$OLD_DATA_ROOT_PATH/aliases/"
 
 # Paths below are for the NEW Server. We use identical paths but you don't have to
 NEW_FILTER_PATH="$NEW_DATA_ROOT_PATH/filters/"
@@ -28,6 +29,7 @@ NEW_DIST_LISTS_PATH="$NEW_DATA_ROOT_PATH/dist_lists/"
 NEW_ACCOUNT_DETAILS_PATH="$NEW_DATA_ROOT_PATH/account_details/"
 NEW_ACCOUNTS_PATH="$NEW_DATA_ROOT_PATH/accounts/"
 NEW_PASSWORDS_PATH="$NEW_DATA_ROOT_PATH/passwords/"
+NEW_ALIASES_PATH="$NEW_DATA_ROOT_PATH/aliases/"
 
 # Lists to append and read from when migrating mailboxes
 TRANSFERRED_TXT_PATH="$NEW_DATA_ROOT_PATH/transferred.txt"
