@@ -35,6 +35,10 @@ RESTORED_TXT_PATH="$NEW_DATA_ROOT_PATH/restored.txt"
 TRANSFERRED_DIFF_TXT_PATH="$NEW_DATA_ROOT_PATH/transferred_diff.txt"
 RESTORED_DIFF_TXT_PATH="$NEW_DATA_ROOT_PATH/restored_diff.txt"
 
+# SCRIPTS DIRECTORIES (so that Python Scripts can be accessed by Bash scripts)
+OLD_SCRIPTS_PATH="/opt/zimbra/ZimbraMigrationTools/scripts/"
+NEW_SCRIPTS_PATH="$OLD_SCRIPTS_PATH"
+
 # Parameters of the new server to connect while transferring data
 
 # Write destination host IP address, SSH Port and SSH User. Make sure that ssh keys for that user is added and
