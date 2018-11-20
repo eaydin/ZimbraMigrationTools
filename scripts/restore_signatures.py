@@ -1,29 +1,32 @@
 from subprocess import check_output
-import pickle
 import argparse
+from VTZM import helpers
 
 
 def main():
 
-    with open(args.file, 'rb') as fp:
-        master_signatures = pickle.load(fp)
+    master_signatures = helpers.read_pickle(args.file)
+    if master_signatures:
 
-    signatures_html = master_signatures['HTML']
-    signatures_plain = master_signatures['PLAIN']
+        signatures_html = master_signatures['HTML']
+        signatures_plain = master_signatures['PLAIN']
 
-    for signame in signatures_html:
+        for signame in signatures_html:
 
-        create_sigs = check_output(["zmprov", "csig", args.user, signame, "zimbraPrefMailSignatureHTML", signatures_html[signame]])
+            create_sigs = check_output(["zmprov", "csig", args.user, signame, "zimbraPrefMailSignatureHTML", signatures_html[signame]])
 
-        if args.verbose:
-            print(create_sigs)
+            if args.verbose:
+                print(create_sigs)
 
-    for signame in signatures_plain:
+        for signame in signatures_plain:
 
-        create_sigs = check_output(["zmprov", "csig", args.user, signame, "zimbraPrefMailSignature", signatures_plain[signame]])
+            create_sigs = check_output(["zmprov", "csig", args.user, signame, "zimbraPrefMailSignature", signatures_plain[signame]])
 
-        if args.verbose:
-            print(create_sigs)
+            if args.verbose:
+                print(create_sigs)
+
+    else:
+        print("Error while reading signatures.")
 
 
 if __name__ == '__main__':

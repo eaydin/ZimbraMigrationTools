@@ -1,7 +1,6 @@
 import subprocess
 import pickle
 import argparse
-import os
 
 
 def read_filters(filepath, verbose=False):
