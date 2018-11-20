@@ -8,8 +8,8 @@ check_err_cont () {
         log_line "Continuing to next element"
         continue
     fi
-
 }
+
 log_line "Restoring accounts and passwords"
 
 for i in $(cat ${NEW_ACCOUNTS_PATH}/users.txt); do
