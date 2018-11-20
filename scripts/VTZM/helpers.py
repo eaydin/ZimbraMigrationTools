@@ -88,6 +88,24 @@ def save_pickle(data, filename, path, verbose=False):
 
 
 def read_pickle(filepath):
+    """Read pickle file
+
+    Parameters
+    ----------
+    filepath: str
+        Filepath of pickle file to read.
+
+    Returns
+    -------
+    Object: Returns the Python object in the pickle file. If an error occurs, returns False
+
+    Raises
+    ------
+    FileNotFound: If the file does not exist.
+    IOError: When an IOError occurs.
+    Exception: Broad exception when arises.
+
+    """
 
     if not os.path.isfile(filepath):
         raise FileNotFoundError("File not found. Please check if file exists: {0}".format(filepath))
