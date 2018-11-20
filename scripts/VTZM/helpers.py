@@ -86,3 +86,22 @@ def save_pickle(data, filename, path, verbose=False):
     except Exception as err:
         raise Exception("Error while dumping pickle: {0}".format(str(err)))
 
+
+def read_pickle(filepath):
+
+    if not os.path.isfile(filepath):
+        raise FileNotFoundError("File not found. Please check if file exists: {0}".format(filepath))
+    try:
+        with open(filepath, 'rb') as fp:
+            dumplings = pickle.load(fp)
+    except IOError:
+        print("IOError while reading pickle file: {0}".format(filepath))
+        return False
+    except Exception as err:
+        print("Unknown error while reading pickle file {0} error: {1}".format(filepath, str(err)))
+        return False
+    else:
+        return dumplings
+
+
+
