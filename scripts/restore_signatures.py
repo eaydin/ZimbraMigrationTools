@@ -52,9 +52,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    status = main()
+    errors = main()
 
-    if status:
+    if errors:
         print("Signature restore for user {0} completed with errors!".format(args.user))
         sys.exit(1)
     else:
