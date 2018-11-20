@@ -37,7 +37,12 @@ RESTORED_DIFF_TXT_PATH="$NEW_DATA_ROOT_PATH/restored_diff.txt"
 
 # Parameters of the new server to connect while transferring data
 
-# Write destination host IP address and SSH Port
+# Write destination host IP address, SSH Port and SSH User. Make sure that ssh keys for that user is added and
+# establish a single connection to add it to known_hosts, are simply disable strict host key checking
 DEST_HOST=10.10.10.10
 DEST_PORT=22
+DEST_SSH_USER=zimbra
 
+log_line () {
+    echo "$(date) - $1"
+}
