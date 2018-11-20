@@ -46,3 +46,10 @@ DEST_SSH_USER=zimbra
 log_line () {
     echo "$(date) - $1"
 }
+
+check_err () {
+    if [[ $? -ne 0 ]]; then
+        log_line " -- ERROR: $1"
+        exit 1
+    fi
+}
