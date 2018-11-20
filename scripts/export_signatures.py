@@ -1,18 +1,40 @@
 from subprocess import check_output
-import pickle
 import argparse
-import os
 from VTZM import helpers
 
 
-def main():
-    user = args.user
+def get_signatures(user):
+    """Get signatures of user
+
+
+    Parameters
+    ----------
+    user : str
+        The username to export. Ex: billgates@microsoft.com
+
+    Returns
+    -------
+    dictionary
+        Returns a dictionary with two dictionaries nested.
+        { 'HTML': { signature_name1: signature1,
+                    signature_name2: signature2
+                    },
+          'PLAIN': { signature_name1: signature1,
+                     signature_name2: signature2
+                   }
+        }
+
+    Raises
+    ------
+    Exception: Raises a generic exception when the zmprov command fails. When the exception occurs,
+        will return False.
+    """
 
     try:
         sigs = check_output(["zmprov", "gsig", user])
     except Exception as err:
         print("Error while using zmprov. Probably you're not zimbra user? Error message: {0}".format(str(err)))
-        raise SystemExit
+        return False
 
     sigs_lines = sigs.split('\n')
 
@@ -21,6 +43,7 @@ def main():
 
     new_sig = True
     html = False
+    temp_sig = ''
 
     for line in sigs_lines:
         if new_sig:
@@ -47,20 +70,21 @@ def main():
         else:
             temp_sig += line.strip()
 
-    if args.verbose:
-        print("HTML Signatures Exported: ")
-        print(signatures_html)
-        print("PLAIN Text Signatures Exported: ")
-        print(signatures_plain)
+    all_signatures = {'HTML': signatures_html, 'PLAIN': signatures_plain}
 
-    pickle_file_path = os.path.join(args.path, user + ".pickle")
+    return all_signatures
 
-    master_pickle = {'HTML': signatures_html, 'PLAIN': signatures_plain}
 
-    with open(pickle_file_path, 'wb') as fp:
-        pickle.dump(master_pickle, fp, protocol=pickle.HIGHEST_PROTOCOL)
-
-    return pickle_file_path
+def main():
+    all_signatures = get_signatures(args.user)
+    if all_signatures:
+        try:
+            helpers.save_pickle(all_signatures, args.user, args.path, args.verbose)
+            print("Signatures file successfully saved for user {0} to pickle file {1}".format(args.user, args.path))
+        except IOError as err:
+            print("IOError while saving signatures file: {0}".format(str(err)))
+        except Exception as err:
+            print("Unknown exception while saving signatures file: {0}".format(str(err)))
 
 
 if __name__ == '__main__':
@@ -75,6 +99,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    saved = main()
-
-    print("Completed for user: {0} path: {1}".format(args.user, saved))
+    main()
