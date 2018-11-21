@@ -11,7 +11,7 @@ while true; do
 
     for account in "${NEW_BOXES[@]}"; do
         # Restore mailbox
-        log_line "Restoring mailbox for ${account} (this will take time...)"
+        log_line "Restoring mailbox for ${account} (this will take long)..."
         zmmailbox -z -m ${account} postRestURL "/?fmt=tgz&resolve=skip" ${NEW_MAILBOX_DATA_PATH}/${account}.tgz
         check_err_cont "Failed to restore ${account} from ${NEW_MAILBOX_DATA_PATH}/${account}.tgz"
 
